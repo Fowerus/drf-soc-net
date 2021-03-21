@@ -37,7 +37,7 @@ class VerifyJWTUserAPIView(APIView):
 
 
 
-class VerifyJWTPostAdminAPIView(APIView):
+class VerifyPostAdminAPIView(APIView):
 	def post(self, request):
 		try:
 			current_user = User.objects.get(id = request.data.get('user_id'))
@@ -51,7 +51,7 @@ class VerifyJWTPostAdminAPIView(APIView):
 
 
 
-class VerifyJWTChatMembership(APIView):
+class VerifyChatMembershipAPIView(APIView):
 	def post(self, request, chat_id):
 		try:
 			current_chat = Chats.objects.get(id = chat_id)

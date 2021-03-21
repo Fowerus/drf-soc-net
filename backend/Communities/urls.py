@@ -8,7 +8,7 @@ urlpatterns = [
 	path('retrieve-update-destroy/<int:id>/', views.CommunityRetrieveUpdateDestroyAPIView.as_view()),
 	path('retrieve-admins/<int:id>/', views.CommunityAdminsRetrieveViewSet.as_view({'get':'list'})),
 	path('category/', views.CommunityCategoryAPIView.as_view()),
-	path('verifyJWTPostAdmin/', views.VerifyJWTPostAdminAPIView.as_view()),
+	path('verifyJWTPostAdmin/', views.VerifyPostAdminAPIView.as_view()),
 
 	#Community's followers 
 	path('community-followers/all-following/<int:id>/', views.Community_followersViewSet.as_view({'get':'list_following'})),

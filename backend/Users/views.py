@@ -1,4 +1,5 @@
 import jwt
+from django.core.validators import validate_email
 from rest_framework.views import APIView
 from rest_framework import viewsets
 from rest_framework import status
@@ -72,13 +73,36 @@ class UserRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
 
 
 
+class UserChangeEmailPasswordAPIView(APIView):
+	def patch(self, request, user_id):
+		try:
+			current_user = User.objects.get(id = user_id)
+			if 'password' in request.data:
+				current_user.set_password(request.data['password'])
+				current_user.save()
+
+			if 'email' in request.data:
+				try:
+					validate_email(request.data['email'])
+					current_user.email = request.data['email']
+					current_user.save()
+				except:
+					return Response({"error":"invalid email"}, status = status.HTTP_400_BAD_REQUEST)
+
+			return Response(status = status.HTTP_200_OK)
+
+		except:
+			return Response(status = status.HTTP_400_BAD_REQUEST)
+
+
+
 #User followers, followings
 class User_followersViewSet(viewsets.ViewSet):
 	serializer_class = User_followersSerializer
 
-	def list_user(self, request, id_user):
+	def list_user(self, request, user_id):
 		try:
-			current_user = User.objects.get(id = id_user)
+			current_user = User.objects.get(id = user_id)
 			serializer = self.serializer_class(current_user.user.all(), many = True)
 			return Response(serializer.data, status = status.HTTP_200_OK)
 
@@ -87,9 +111,9 @@ class User_followersViewSet(viewsets.ViewSet):
 			return Response(status = status.HTTP_400_BAD_REQUEST)
 
 
-	def list_user_follower(self, request, id_user_follower):
+	def list_user_follower(self, request, user_id_follower):
 		try:
-			current_follower = User.objects.get(id = id_user_follower)
+			current_follower = User.objects.get(id = user_id_follower)
 			serializer = self.serializer_class(current_follower.user_follower.all(), many = True)
 			return Response(serializer.data, status = status.HTTP_200_OK)
 			
@@ -147,9 +171,9 @@ class UserPostsListCreateAPIView(APIView):
 #All posts of user
 class UserPostsListUserAPIView(APIView):
 	serializer_class = UserPostsListSerializer
-	def get(self, request, id_user):
+	def get(self, request, user_id):
 		try:
-			user = Users.objects.get(id = id_user)
+			user = Users.objects.get(id = user_id)
 			serializer = self.serializer_class(user.user_posts.all(),many = True)
 
 			return Response(serializer.data, status = status.HTTP_200_OK)

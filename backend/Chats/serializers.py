@@ -1,15 +1,20 @@
-from .models import *
 from rest_framework import serializers
+from .models import *
+
+from Users.models import User
 
 
 
 class ChatsSerializer(serializers.ModelSerializer):
 
 	def create(self, validated_data):
-		chat = Chats().save()
-		print(chat)
-		chat.users.update(validated_data['users']).save()
-		admin = Chats_admins.objects.create(chat = chat.id, user = validated_data['main_user'])
+		chat = Chats.objects.create()
+
+		for i in validated_data['users']:
+			chat.users.add(i)
+		chat.save()
+
+		admin = Chats_admins.objects.create(chat = chat, user = User.objects.get(id = validated_data['users'][0].id))
 		return chat
 
 	class Meta:
@@ -21,4 +26,4 @@ class ChatsSerializer(serializers.ModelSerializer):
 class MessagesSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Messages
-		fields = ['id', 'chat', 'user','text']
+		fields = ['id', 'chat', 'user','message']

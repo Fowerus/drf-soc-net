@@ -8,7 +8,7 @@ from rest_framework import generics
 from .serializers import * 
 from .models import *
 from Users.models import User
-from django_blog.views import VerifyJWTPostAdminAPIView
+from django_blog.views import VerifyPostAdminAPIView
 
 
 
