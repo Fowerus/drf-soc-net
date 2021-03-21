@@ -14,6 +14,7 @@ urlpatterns = [
 
 
 	#User's interactions
+	path('user-list/', views.UserListAPIView.as_view()),
 	path('user-followers/all-user/<int:user_id>/', views.User_followersViewSet.as_view({'get':'list_user'})),
 	path('user-followers/all-user-follower/<int:id_follower>/', views.User_followersViewSet.as_view({'get':'list_user_follower'})),
 	path('user-followers/create-delete/', views.User_followersViewSet.as_view({'post':'create_delete'})),

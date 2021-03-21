@@ -1,3 +1,5 @@
+from django.shortcuts import render
+
 import jwt
 from django.conf import settings
 from rest_framework.views import APIView
@@ -11,6 +13,10 @@ from Users.models import User
 from Communities.models import Community
 from Chats.models import Chats
 
+
+
+def main(request):
+	return render(request, 'index.html')
 
 
 class VerifyJWTUserAPIView(APIView):
