@@ -13,6 +13,7 @@ It is a social network API who supports all basic functions in any social networ
 * Install all libraries from requirements.txt  
   You can do that with run `python3 -m pip install -r requirements.txt`
 * Install all migrations `python3 manage.py makemigrations && python3 manage.py migrate`
+* Do not forget to create a superuser account `python3 manage.py createsuperuser`  
 
 ## **Running**
 
