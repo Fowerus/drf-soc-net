@@ -6,10 +6,13 @@ It is a social network API who supports all basic functions in any social networ
 
 ## **Installation**
 
+* Go to backend `cd backend/`
 * Establish a virtual environment(recommend use python3)  
   In python3 you can do that with with `python3 -m venv <environment name>`
+* Activate the virtual environment `source <environment name>/bin/activate`
 * Install all libraries from requirements.txt  
   You can do that with run `python3 -m pip install -r requirements.txt`
+* Install all migrations `python3 manage.py makemigrations && python3 manage.py migrate`
 
 ## **Running**
 
