@@ -126,6 +126,7 @@
 ### **Actions on users**    
 * `user-list/` - link to the list of users  
   **GET**    
+  *`Response 200`*   
   ```json  
   [  
     //output
