@@ -9,13 +9,6 @@ from .models import *
 
 
 #User's auth
-class UserListSerializer(serializers.ModelSerializer):
-	class Meta:
-		model = User
-		fields = ['id','username','email','last_name','first_name']
-
-
-
 class UserRegistrationSerializer(serializers.ModelSerializer):
 	password = serializers.CharField(max_length=128, min_length=8, write_only=True)
 
@@ -75,7 +68,7 @@ class UserRetrieveUpdateDestroySerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = User
-		fields = ['id', 'username', 'email', 'last_name', 'first_name', 'password']
+		fields = ['id', 'username', 'email', 'last_name', 'first_name']
 
 
 

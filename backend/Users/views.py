@@ -18,22 +18,7 @@ from django_blog.views import VerifyJWTUserAPIView
 #All users
 class UserListAPIView(generics.ListAPIView):
 	queryset = User.objects.all()
-	serializer_class = UserListSerializer
-
-
-
-#Information about user
-class UserInfoAPIView(APIView):
-	serializer_class = UserListSerializer
-	def get(self, request, id_user):
-		try:
-			current_user = User.objects.get(id = id_user)
-			serializer = self.serializer_class(current_user, many = False)
-
-			return Response(serializer.data, status = status.HTTP_200_OK)
-
-		except:
-			return Response(status = status.HTTP_400_BAD_REQUEST)
+	serializer_class = UserRetrieveUpdateDestroySerializer
 
 
 
@@ -73,7 +58,7 @@ class UserRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
 
 
 
-class UserChangeEmailPasswordAPIView(APIView):
+class UserChangePasswordAPIView(APIView):
 	def patch(self, request, user_id):
 		try:
 			current_user = User.objects.get(id = user_id)
@@ -81,15 +66,8 @@ class UserChangeEmailPasswordAPIView(APIView):
 				current_user.set_password(request.data['password'])
 				current_user.save()
 
-			if 'email' in request.data:
-				try:
-					validate_email(request.data['email'])
-					current_user.email = request.data['email']
-					current_user.save()
-				except:
-					return Response({"error":"invalid email"}, status = status.HTTP_400_BAD_REQUEST)
-
-			return Response(status = status.HTTP_200_OK)
+				return Response(status = status.HTTP_200_OK)
+			return Response(status = status.HTTP_400_BAD_REQUEST)
 
 		except:
 			return Response(status = status.HTTP_400_BAD_REQUEST)
@@ -159,7 +137,7 @@ class UserPostsListCreateAPIView(APIView):
 
 			if serializer.is_valid():
 				serializer.save()
-				return Response(serializer.data, status = status.HTTP_200_OK)
+				return Response(serializer.data, status = status.HTTP_201_CREATED)
 
 			return Response(status = status.HTTP_400_BAD_REQUEST)
 
@@ -173,7 +151,7 @@ class UserPostsListUserAPIView(APIView):
 	serializer_class = UserPostsListSerializer
 	def get(self, request, user_id):
 		try:
-			user = Users.objects.get(id = user_id)
+			user = User.objects.get(id = user_id)
 			serializer = self.serializer_class(user.user_posts.all(),many = True)
 
 			return Response(serializer.data, status = status.HTTP_200_OK)
@@ -242,14 +220,19 @@ class UserPostCommentsListCreateViewSet(viewsets.ViewSet):
 			validated_data = {'post':post_id, 'user':request.data['post_id'], 'comment':request.data['comment']}
 			serializer = UserPostCommentsListSerializer(data = validated_data)
 			if serializer.is_valid():
-				if 'id' in request.data:
-
-					serializer.delete(request.data['id'])
-					return Response(status = status.HTTP_200_OK)
-
 				serializer.save()
-				return Response(serializer.data, status = status.HTTP_200_OK)
+				return Response(serializer.data, status = status.HTTP_201_CREATED)
 
 			return Response(status = status.HTTP_400_BAD_REQUEST)
+		except:
+			return Response(status = status.HTTP_400_BAD_REQUEST)
+
+
+	def delete(self, request, comment_id):
+		try:
+			comment = UserPostComments.objects.get(id = comment_id)
+			comment.delete()
+
+			return Response(status = status.HTTP_200_OK)
 		except:
 			return Response(status = status.HTTP_400_BAD_REQUEST)
