@@ -24,16 +24,16 @@
   }  
   ```  
   
-* `auth/login/` - login link for user  
+* `auth/login/` - login link for user   
   **POST**  
-  ```json  
+  ```json   
   {  
     //input
     "email":"user1@gmail.com",    
     "password":"user1user1"  
   }  
   ```   
-  *`Response 200`*  
+  *`Response 200`*   
   ```json  
   {  
     //output
@@ -78,15 +78,15 @@
   }  
   ```  
   **DELETE** - delete    
-  *`Response 204`*  
+  *`Response 204`*   
   ```json   
   {   
     //output   
   }   
   ```   
    
-* `auth/change-password/<int:user_id>/` - link to change user password  
-  `auth/change-password/3/`
+* `auth/change-password/<int:user_id>/` - link to change user password   
+  `auth/change-password/3/`   
   **PATCH**    
   ```json    
   {
@@ -111,7 +111,7 @@
   }  
   ```    
   *`Response 200`*  
-  ```json  
+  ```json   
   {  
     //output   
     "id": 3,  
@@ -146,8 +146,8 @@
   ]  
   ```  
 
-* `user-followers/create-delete/` - link to subscribe or unsubscribe the user
-  **POST**
+* `user-followers/create-delete/` - link to subscribe or unsubscribe the user   
+  **POST**   
   ```json
   {
     //input
@@ -174,8 +174,8 @@
   }
   ```   
    
-* `user-followers/all-user/<int:user_id>/` - link to the list of user subscribers
-  `user-followers/all-user/3/`  
+* `user-followers/all-user/<int:user_id>/` - link to the list of user subscribers   
+  `user-followers/all-user/3/`   
   **GET**  
   *`Response 200`*   
   ```json   
@@ -188,7 +188,7 @@
   ]   
   ```      
    
-* `user-followers/all-user-follower/<int:id_follower>/` - link to all user subscriptions
+* `user-followers/all-user-follower/<int:id_follower>/` - link to all user subscriptions   
   `user-followers/all-user-follower/1/`   
   **GET**   
   *`Response 200`*   
@@ -203,9 +203,9 @@
   ```       
      
      
-### **Actions on posts**
-* `posts/` - link to the list of all posts of all users
-  **POST**
+### **Actions on posts**   
+* `posts/` - link to the list of all posts of all users   
+  **POST**   
   ```json
   {
     //input
@@ -213,7 +213,7 @@
     "author":1
   }
   ```
-  *`Response 201`*
+  *`Response 201`*   
   ```json
   {
     //output
@@ -222,7 +222,7 @@
     "author": 1
   }
   ```
-  **GET**
+  **GET**   
   *`Response 200`*   
   ```json
   [
@@ -240,10 +240,10 @@
   ]
   ```   
 
-* `posts/posts-of-user/<int:user_id>/` - link to the list of user posts
-  `posts/posts-of-user/3/`
-  **GET**   
-  *`Response 200`*
+* `posts/posts-of-user/<int:user_id>/` - link to the list of user posts   
+  `posts/posts-of-user/3/`   
+  **GET**      
+  *`Response 200`*   
   ```json   
   [
     //output
@@ -255,10 +255,10 @@
   ]
   ```   
 
-* `posts/retrieve-update-destroy/<int:id>/` - link to retrieve, update, destroy user's post
-  `posts/retrieve-update-destroy/1/`
-  **GET**
-  *`Response 200`*
+* `posts/retrieve-update-destroy/<int:id>/` - link to retrieve, update, destroy user's post   
+  `posts/retrieve-update-destroy/1/`   
+  **GET**   
+  *`Response 200`*   
   ```json
   {
     //output
@@ -284,8 +284,8 @@
     "author": 3
   }
   ```   
-  **DELETE**
-  *`Response 204`*
+  **DELETE**   
+  *`Response 204`*   
   ```json
   {
     //output
@@ -293,10 +293,10 @@
   ```     
    
       
-### **Post's like functionality**
-* `posts/like/create-delete/<int:post_id>/` - link to create a like or remove like from user's post
-  `posts/like/create-delete/2/`
-  **POST**
+### **Post's like functionality**   
+* `posts/like/create-delete/<int:post_id>/` - link to create a like or remove like from user's post   
+  `posts/like/create-delete/2/`   
+  **POST**   
   ```json
   {
     //input
@@ -304,14 +304,14 @@
   }
   ```
   If like already exists   
-  *`Response 200`*
+  *`Response 200`*   
   ```json
   {
     //output
   }
   ```
   If not   
-  *`Response 201`*
+  *`Response 201`*   
   ```json
   {
     //output
@@ -319,9 +319,9 @@
   ```
 
 * `posts/like/all/<int:post_id>/` - link to the list of like of user's post   
-  `posts/like/all/2/`
-  **GET**
-  *`Response 200`*
+  `posts/like/all/2/`   
+  **GET**   
+  *`Response 200`*   
   ```json
   [
     //output
@@ -334,10 +334,10 @@
   ```     
     
     
-### **Post's comment functionality**
-* `posts/comment/create/<int:post_id>/` - link to the create comment for a user's post
-  `posts/comment/create/2/`
-  **POST**
+### **Post's comment functionality**   
+* `posts/comment/create/<int:post_id>/` - link to the create comment for a user's post   
+  `posts/comment/create/2/`   
+  **POST**   
   ```json
   {
     //input
@@ -345,7 +345,7 @@
     "comment":"Good job"
   }
   ``` 
-  *`Response 201`*
+  *`Response 201`*   
   ```json
   {
     //output
@@ -355,12 +355,11 @@
     "comment": "Good job"
   }   
   ``` 
-
-
-* `posts/comment/all/<int:post_id>/` - link to the list of all comments of the user's post 
-  `posts/comment/all/2/`
-  **GET**
-  *`Response 200`*
+  
+* `posts/comment/all/<int:post_id>/` - link to the list of all comments of the user's post   
+  `posts/comment/all/2/`   
+  **GET**   
+  *`Response 200`*   
   ```json
   [
     //output
@@ -374,9 +373,9 @@
   ```
   
 * `posts/comment/delete/<int:comment_id>/` - link to the remove comment for a user's post  
-  `posts/comment/delete/1/`
-  **DELETE**
-  *`Response 200`*
+  `posts/comment/delete/1/`   
+  **DELETE**   
+  *`Response 200`*   
   ```json
   {
     //output
