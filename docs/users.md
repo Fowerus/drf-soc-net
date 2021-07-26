@@ -120,8 +120,9 @@
     "last_name": "user2",   
     "first_name": "user2"  
   }  
-  ```  
-
+  ```   
+    
+       
 ### **Actions on users**    
 * `user-list/` - link to the list of users  
   **GET**    
@@ -199,8 +200,9 @@
       "user_follower": 1
     }
   ]   
-  ```  
-
+  ```       
+     
+     
 ### **Actions on posts**
 * `posts/` - link to the list of all posts of all users
   **POST**
@@ -288,8 +290,9 @@
   {
     //output
   }
-  ```   
-
+  ```     
+   
+      
 ### **Post's like functionality**
 * `posts/like/create-delete/<int:post_id>/` - link to create a like or remove like from user's post
   `posts/like/create-delete/2/`
@@ -328,9 +331,9 @@
       "user": 1
     }
   ]
-  ```
-
-
+  ```     
+    
+    
 ### **Post's comment functionality**
 * `posts/comment/create/<int:post_id>/` - link to the create comment for a user's post
   `posts/comment/create/2/`
