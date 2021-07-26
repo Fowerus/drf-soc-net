@@ -1,5 +1,6 @@
-### **User API** - **`/users/`** 
+## **User API** - **`/users/`** 
 
+### **Authentication functionality**    
 * `auth/registration/` - link to register a new user  
   **POST**  
   ```json  
@@ -121,6 +122,7 @@
   }  
   ```  
 
+### **Actions on users**    
 * `user-list/` - link to the list of users  
   **GET**    
   ```json  
@@ -199,6 +201,7 @@
   ]   
   ```  
 
+### **Actions on posts**
 * `posts/` - link to the list of all posts of all users
   **POST**
   ```json
@@ -287,6 +290,7 @@
   }
   ```   
 
+### **Post's like functionality**
 * `posts/like/create-delete/<int:post_id>/` - link to create a like or remove like from user's post
   `posts/like/create-delete/2/`
   **POST**
@@ -311,7 +315,6 @@
   }
   ```
 
-
 * `posts/like/all/<int:post_id>/` - link to the list of like of user's post   
   `posts/like/all/2/`
   **GET**
@@ -327,6 +330,8 @@
   ]
   ```
 
+
+### **Post's comment functionality**
 * `posts/comment/create/<int:post_id>/` - link to the create comment for a user's post
   `posts/comment/create/2/`
   **POST**
@@ -347,7 +352,8 @@
     "comment": "Good job"
   }   
   ``` 
-  
+
+
 * `posts/comment/all/<int:post_id>/` - link to the list of all comments of the user's post 
   `posts/comment/all/2/`
   **GET**
@@ -363,8 +369,8 @@
     }
   ]
   ```
-  
-* `posts/comment/delete/<int:comment_id>/` - link to the remove comment for a user's post
+
+  * `posts/comment/delete/<int:comment_id>/` - link to the remove comment for a user's post
     `posts/comment/delete/1/`
     **DELETE**
     *`Response 200`*
