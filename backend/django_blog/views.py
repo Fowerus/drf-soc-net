@@ -26,7 +26,7 @@ class VerifyJWTUserAPIView(APIView):
 			if current_user and current_user.is_active:
 				token_decode = jwt.decode(request.data.get('token'),settings.SECRET_KEY, algorithms = ['HS256'])
 				
-				if token_decode['username'] == current_user.username and token_decode['id'] == current_user.id and token_decode['email'] == current_user.email:
+				if token_decode['id'] == current_user.id:
 
 					return Response({
 						'id':current_user.id,
