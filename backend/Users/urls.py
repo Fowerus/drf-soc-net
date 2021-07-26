@@ -7,7 +7,7 @@ urlpatterns = [
 	#User's auth
 	path('auth/registration/',views.UserRegistrationAPIView.as_view()),
 	path('auth/login/',views.UserLoginAPIView.as_view()),
-	path('auth/retrieve-update-destroy/<int:id_user>/', views.UserRetrieveUpdateDestroyAPIView.as_view()),
+	path('auth/retrieve-update-destroy/<int:id>/', views.UserRetrieveUpdateDestroyAPIView.as_view()),
 	path('auth/change-email-password/<int:user_id>/', views.UserChangeEmailPasswordAPIView.as_view()),
 	path('auth/user-info/<int:user_id>/',views.UserInfoAPIView.as_view()),
 	path('auth/VerifyJWTUser/',views.VerifyJWTUserAPIView.as_view()),
