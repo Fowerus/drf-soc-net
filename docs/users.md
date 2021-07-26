@@ -372,13 +372,13 @@
     }
   ]
   ```
-
-  * `posts/comment/delete/<int:comment_id>/` - link to the remove comment for a user's post
-    `posts/comment/delete/1/`
-    **DELETE**
-    *`Response 200`*
-    ```json
-    {
-      //output
-    }
-    ```
+  
+* `posts/comment/delete/<int:comment_id>/` - link to the remove comment for a user's post
+  `posts/comment/delete/1/`
+  **DELETE**
+  *`Response 200`*
+  ```json
+  {
+    //output
+  }
+   ```
