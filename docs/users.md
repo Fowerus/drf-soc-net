@@ -57,7 +57,8 @@
     "first_name":"user1"  
   }  
   ```  
-* **PATCH** `auth/retrieve-update-destroy/<int:id_user>/`    
+* **PATCH** `auth/retrieve-update-destroy/<int:id_user>/` 
+  You can skip almost all fields except one   
   INPUT    
   ```json  
   {  
