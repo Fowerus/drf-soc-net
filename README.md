@@ -22,15 +22,17 @@ For running you just need run `python3 manage.py runserver`
 ## **Functionality details**
 
 Users can  
-* Create communities
-* Create posts on his page and community page(If he is an admin or author)
-* Make like
-* Make comments
-* Subscribe or receive subscriptions from other accounts
-* Create chats with one or more accounts
-* Exchange messages in current chat
-* Can add or remove admin(If he admin of any community)
-* Change information about yourself
+* Create communities    
+* Create posts on his page and community page(If he is an admin or author)   
+* Make like    
+* Make comments    
+* Subscribe or receive subscriptions from other accounts    
+* Create chats with one or more accounts    
+* Exchange messages in current chat    
+* Can add or remove admin(If he admin of any community)    
+* Change information about yourself    
+    
+Visit /docs/index.md to learn about API functions    
 
 ## **Other**
 
