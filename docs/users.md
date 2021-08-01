@@ -16,7 +16,7 @@
   }  
   ```    
   OUTPUT    
-  *`Response 201`*  
+  *`Response 201`*    
   ```json  
   {  
     "username":"user1",   
@@ -26,8 +26,8 @@
   }  
   ```    
     
-### **Login**
-* **POST** `auth/login/`
+### **Login**    
+* **POST** `auth/login/`    
   INPUT    
   ```json   
   {  
@@ -44,11 +44,11 @@
   }  
   ```  
     
-### **Retrieve, Update, Destroy a user**
-* **GET** `auth/retrieve-update-destroy/<int:id_user>/`
+### **Retrieve, Update, Destroy a user**    
+* **GET** `auth/retrieve-update-destroy/<int:id_user>/`    
   OUTPUT    
   *`Response 200`*  
-  ```json  
+  ```json    
   { 
     "id":3,  
     "username":"user1",  
@@ -57,7 +57,7 @@
     "first_name":"user1"  
   }  
   ```  
-* **PATCH** `auth/retrieve-update-destroy/<int:id_user>/`
+* **PATCH** `auth/retrieve-update-destroy/<int:id_user>/`    
   INPUT    
   ```json  
   {  
@@ -78,24 +78,24 @@
     "first_name":"user2"  
   }  
   ```  
-* **DELETE** `auth/retrieve-update-destroy/<int:id_user>/`
+* **DELETE** `auth/retrieve-update-destroy/<int:id_user>/`    
   OUTPUT    
   *`Response 204`*   
 
-### **Changing password**
-* **PATCH** `auth/change-password/<int:user_id>/`
+### **Changing password**    
+* **PATCH** `auth/change-password/<int:user_id>/`    
   INPUT    
   ```json    
   {
     "password":"user2user2"  
-  }  
+  }      
   ```   
   OUTPUT    
-  *`Response 200`*   
+  *`Response 200`*    
     
-### **Verify JWT token**
-* **POST** `auth/VerifyJWTUser/`
-  INPUT    
+### **Verify JWT token**    
+* **POST** `auth/VerifyJWTUser/`    
+  INPUT     
   ```json  
   {  
     "username":"user2",
@@ -114,13 +114,13 @@
   }  
   ```   
     
----    
+    
 ## **Subscriptions and similar functions**
 
 ### **List of all user**    
 * **GET**  `user-list/`    
   OUTPUT    
-  *`Response 200`*   
+  *`Response 200`*     
   ```json  
   [  
     {  
@@ -167,13 +167,12 @@
   }
   ```     
     
-### **List of all user subscribers**
-* **GET** `user-followers/all-user/<int:user_id>/`    
+### **List of all user subscribers**    
+* **GET** `user-followers/all-user/<int:user_id>/`     
   OUTPUT    
-  *`Response 200`*   
+  *`Response 200`*    
   ```json   
   [
-    //output
     {
       "user": 3,
       "user_follower": 1
@@ -194,17 +193,17 @@
   ]   
   ```  
     
----
-## **Posts and similar functions**  
+    
+## **Posts and similar functions**   
     
 ### **Create and get Posts**   
-* **POST** `posts/`
+* **POST** `posts/`    
   INPUT    
   ```json
   {
     "text":"Hello first",
     "author":1
-  }
+  } 
   ```    
   OUTPUT    
   *`Response 201`*   
@@ -215,10 +214,10 @@
     "author": 1
   }
   ```    
-* **GET** `posts/`
-  OUTPUT   
-  *`Response 200`*   
-  ```json
+* **GET** `posts/`    
+  OUTPUT    
+  *`Response 200`*    
+  ```json    
   [
     {
       "id": 2,
@@ -233,10 +232,10 @@
   ]
   ```   
 
-### **User posts**
-* **GET** `posts/posts-of-user/<int:user_id>/`    
-  OUTPUT    
-  *`Response 200`*   
+### **User posts**    
+* **GET** `posts/posts-of-user/<int:user_id>/`     
+  OUTPUT     
+  *`Response 200`*    
   ```json   
   [
     {
@@ -247,8 +246,8 @@
   ]
   ```   
     
-### **Retrieve, Update, Destroy a post**
-* **GET** `posts/retrieve-update-destroy/<int:id>/`    
+### **Retrieve, Update, Destroy a post**    
+* **GET** `posts/retrieve-update-destroy/<int:id>/`     
   OUTPUT     
   *`Response 200`*   
   ```json
@@ -275,21 +274,21 @@
     "author": 3
   }
   ```   
-* **DELETE** `posts/retrieve-update-destroy/<int:id>/`  
+* **DELETE** `posts/retrieve-update-destroy/<int:id>/`   
   OUTPUT    
   *`Response 204`*   
     
----    
+    
 ## **Likes and similar functions**   
 
-### **Create-delete like**
-* **POST** `posts/like/create-delete/<int:post_id>/`
-  INPUT    
+### **Create-delete like**    
+* **POST** `posts/like/create-delete/<int:post_id>/`    
+  INPUT      
   ```json
   {
     "id":1
   }
-  ```
+  ```  
   OUTPUT    
   If like already exists   
   *`Response 200`*   
@@ -311,11 +310,11 @@
   ]
   ```    
    
----
+    
 ## **Comments and similar functions**    
     
-### **Create comments**  
-* **POST**   
+### **Create comments**   
+* **POST** `posts/comment/create/<int:post_id>/`     
   INPUT   
   ```json
   {
@@ -334,7 +333,7 @@
   }   
   ```  
 
-### **List of all comments of user's post**    
+### **List of all comments of user's post**     
 * **GET** `posts/comment/all/<int:post_id>/`    
   OUTPUT    
   *`Response 200`*   
@@ -349,7 +348,7 @@
   ]
   ```    
 
-### **Remove comment for user's post**
+### **Remove comment for user's post**    
 * **DELETE** `posts/comment/delete/<int:comment_id>/`    
   OUTPUT    
   *`Response 200`*    
