@@ -259,6 +259,7 @@
   }
   ```   
 * **PATCH** `posts/retrieve-update-destroy/<int:id>/`  
+  You can skip almost all fields except one   
   INPUT    
   ```json
   {
