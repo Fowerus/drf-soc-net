@@ -1,54 +1,55 @@
-## **User API** - **`/users/`** 
-
-### **Authentication functionality**    
-* `auth/registration/` - link to register a new user  
-  **POST**  
+# **User API** - **`/users/`**   
+      
+    
+## **Authentication and similar functions**
+    
+### **Registration**    
+* **POST** `auth/registration/`    
+  INPUT    
   ```json  
   {  
-    //input
     "username":"user1",   
     "email":"user1@gmail.com",    
     "last_name":"user1",  
     "first_name":"user1",
     "password":"user1user1"  
   }  
-  ```  
+  ```    
+  OUTPUT    
   *`Response 201`*  
   ```json  
   {  
-    //output
     "username":"user1",   
     "email":"user1@gmail.com",    
     "last_name":"user1",  
     "first_name":"user1"  
   }  
-  ```  
-  
-* `auth/login/` - login link for user   
-  **POST**  
+  ```    
+    
+### **Login**
+* **POST** `auth/login/`
+  INPUT    
   ```json   
   {  
-    //input
     "email":"user1@gmail.com",    
     "password":"user1user1"  
   }  
   ```   
+  OUTPUT    
   *`Response 200`*   
   ```json  
   {  
-    //output
     "username":"user1",  
     "token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MywidXNlcm5hbWUiOiJ1c2VyMSIsImVtYWlsIjoidXNlcjFAZ21haWwuY29tIn0.gknDOogiYJBYvfwTHGbfIgvu5NG0figGJwmi3SOcq30"
   }  
   ```  
-  
-* `auth/retrieve-update-destroy/<int:id_user>/` - link to retrieve, update, destroy a user  
-  `auth/retrieve-update-destroy/3/`   
-  **GET** - retrieve   
+    
+### **Retrieve, Update, Destroy a user**
+* **GET** `auth/retrieve-update-destroy/<int:id_user>/`
+  OUTPUT    
   *`Response 200`*  
   ```json  
   { 
-    //output
     "id":3,  
     "username":"user1",  
     "email":"user1@gmail.com",  
@@ -56,20 +57,20 @@
     "first_name":"user1"  
   }  
   ```  
-  **PATCH** - update  
+* **PATCH** `auth/retrieve-update-destroy/<int:id_user>/`
+  INPUT    
   ```json  
   {  
-    //input (You can skip any field)  
     "username":"user2",  
     "email":"user2@gmail.com",  
     "last_name":"user2",   
     "first_name":"user2"   
   }  
   ```    
+  OUTPUT    
   *`Response 200`*  
   ```json  
   {  
-    //output
     "id":3,  
     "username":"user2",  
     "email":"user2@gmail.com",  
@@ -77,43 +78,34 @@
     "first_name":"user2"  
   }  
   ```  
-  **DELETE** - delete    
+* **DELETE** `auth/retrieve-update-destroy/<int:id_user>/`
+  OUTPUT    
   *`Response 204`*   
-  ```json   
-  {   
-    //output   
-  }   
-  ```   
-   
-* `auth/change-password/<int:user_id>/` - link to change user password   
-  `auth/change-password/3/`   
-  **PATCH**    
+
+### **Changing password**
+* **PATCH** `auth/change-password/<int:user_id>/`
+  INPUT    
   ```json    
   {
-    //input
     "password":"user2user2"  
   }  
-  ```    
-  *`Response 200`*   
-  ```json
-  {
-    //output
-  }   
   ```   
-   
-* `auth/VerifyJWTUser/` - link to verify JWT token  
-  **POST**    
+  OUTPUT    
+  *`Response 200`*   
+    
+### **Verify JWT token**
+* **POST** `auth/VerifyJWTUser/`
+  INPUT    
   ```json  
   {  
-    //input
     "username":"user2",
     "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MywidXNlcm5hbWUiOiJ1c2VyMSIsImVtYWlsIjoidXNlcjFAZ21haWwuY29tIn0.gknDOogiYJBYvfwTHGbfIgvu5NG0figGJwmi3SOcq30"
   }  
-  ```    
+  ```   
+  OUTPUT   
   *`Response 200`*  
   ```json   
-  {  
-    //output   
+  {    
     "id": 3,  
     "email": "user2@gmail.com",  
     "username": "user2",  
@@ -122,14 +114,15 @@
   }  
   ```   
     
-       
-### **Actions on users**    
-* `user-list/` - link to the list of users  
-  **GET**    
+---    
+## **Subscriptions and similar functions**
+
+### **List of all user**    
+* **GET**  `user-list/`    
+  OUTPUT    
   *`Response 200`*   
   ```json  
   [  
-    //output
     {  
         "id": 3,  
         "username": "user2",  
@@ -146,21 +139,21 @@
     }  
   ]  
   ```  
-
-* `user-followers/create-delete/` - link to subscribe or unsubscribe the user   
-  **POST**   
+    
+### **Subscribe or unsubscribe**      
+* **POST** `user-followers/create-delete/`    
+  INPUT    
   ```json
   {
-    //input
     "user":3,
     "user_follower":1
   }
-  ```   
+  ```  
+  OUTPUT     
   If subscription already exists   
   *`Response 200`*   
   ```json
   {
-    //output
     "user":3,
     "user_follower":1
   }
@@ -169,15 +162,14 @@
   *`Response 201`*   
   ```json
   {
-    //output
     "user":3,
     "user_follower":1
   }
-  ```   
-   
-* `user-followers/all-user/<int:user_id>/` - link to the list of user subscribers   
-  `user-followers/all-user/3/`   
-  **GET**  
+  ```     
+    
+### **List of all user subscribers**
+* **GET** `user-followers/all-user/<int:user_id>/`    
+  OUTPUT    
   *`Response 200`*   
   ```json   
   [
@@ -187,47 +179,47 @@
       "user_follower": 1
     }
   ]   
-  ```      
-   
-* `user-followers/all-user-follower/<int:id_follower>/` - link to all user subscriptions   
-  `user-followers/all-user-follower/1/`   
-  **GET**   
+  ```    
+
+### **List of all user subscriptions**    
+* **GET** `user-followers/all-user-follower/<int:id_follower>/`    
+  OUTPUT    
   *`Response 200`*   
   ```json   
   [   
-    //output
     {
       "user": 3,
       "user_follower": 1
     }
   ]   
-  ```       
-     
-     
-### **Actions on posts**   
-* `posts/` - link to the list of all posts of all users   
-  **POST**   
+  ```  
+    
+---
+## **Posts and similar functions**  
+    
+### **Create and get Posts**   
+* **POST** `posts/`
+  INPUT    
   ```json
   {
-    //input
     "text":"Hello first",
     "author":1
   }
-  ```
+  ```    
+  OUTPUT    
   *`Response 201`*   
   ```json
   {
-    //output
     "id": 1,
     "text": "Hello first",
     "author": 1
   }
-  ```
-  **GET**   
+  ```    
+* **GET** `posts/`
+  OUTPUT   
   *`Response 200`*   
   ```json
   [
-    //output
     {
       "id": 2,
       "text": "Hello second",
@@ -241,13 +233,12 @@
   ]
   ```   
 
-* `posts/posts-of-user/<int:user_id>/` - link to the list of user posts   
-  `posts/posts-of-user/3/`   
-  **GET**      
+### **User posts**
+* **GET** `posts/posts-of-user/<int:user_id>/`    
+  OUTPUT    
   *`Response 200`*   
   ```json   
   [
-    //output
     {
       "id": 2,
       "text": "Hello second",
@@ -255,28 +246,27 @@
     }
   ]
   ```   
-
-* `posts/retrieve-update-destroy/<int:id>/` - link to retrieve, update, destroy user's post   
-  `posts/retrieve-update-destroy/1/`   
-  **GET**   
+    
+### **Retrieve, Update, Destroy a post**
+* **GET** `posts/retrieve-update-destroy/<int:id>/`    
+  OUTPUT     
   *`Response 200`*   
   ```json
   {
-    //output
     "id": 1,
     "text": "Hello first",
     "author": 1
   }
   ```   
-  **PATCH**   
-  *`Response 200`*   
+* **PATCH** `posts/retrieve-update-destroy/<int:id>/`  
+  INPUT    
   ```json
   {
-    //input
     "text":"Hello fourth",
     "author":3
   }
   ```   
+  OUTPUT    
   *`Response 200`*   
   ```json
   {
@@ -285,85 +275,71 @@
     "author": 3
   }
   ```   
-  **DELETE**   
+* **DELETE** `posts/retrieve-update-destroy/<int:id>/`  
+  OUTPUT    
   *`Response 204`*   
+    
+---    
+## **Likes and similar functions**   
+
+### **Create-delete like**
+* **POST** `posts/like/create-delete/<int:post_id>/`
+  INPUT    
   ```json
   {
-    //output
-  }
-  ```     
-   
-      
-### **Post's like functionality**   
-* `posts/like/create-delete/<int:post_id>/` - link to create a like or remove like from user's post   
-  `posts/like/create-delete/2/`   
-  **POST**   
-  ```json
-  {
-    //input
     "id":1
   }
   ```
+  OUTPUT    
   If like already exists   
   *`Response 200`*   
-  ```json
-  {
-    //output
-  }
-  ```
-  If not   
-  *`Response 201`*   
-  ```json
-  {
-    //output
-  }
-  ```
 
-* `posts/like/all/<int:post_id>/` - link to the list of like of user's post   
-  `posts/like/all/2/`   
-  **GET**   
+  If not   
+  *`Response 201`*  
+    
+### **List of like of user's post**    
+* **GET** `posts/like/all/<int:post_id>/`    
+  OUTPUT    
   *`Response 200`*   
   ```json
   [
-    //output
     {
       "id": 3,
       "post": 2,
       "user": 1
     }
   ]
-  ```     
+  ```    
+   
+---
+## **Comments and similar functions**    
     
-    
-### **Post's comment functionality**   
-* `posts/comment/create/<int:post_id>/` - link to the create comment for a user's post   
-  `posts/comment/create/2/`   
-  **POST**   
+### **Create comments**  
+* **POST**   
+  INPUT   
   ```json
   {
-    //input
     "user_id":3,
     "comment":"Good job"
   }
-  ``` 
+  ```  
+  OUTPUT    
   *`Response 201`*   
   ```json
   {
-    //output
     "id": 1,
     "post": 2,
     "user": 3,
     "comment": "Good job"
   }   
-  ``` 
-  
-* `posts/comment/all/<int:post_id>/` - link to the list of all comments of the user's post   
-  `posts/comment/all/2/`   
-  **GET**   
+  ```  
+
+### **List of all comments of user's post**    
+* **GET** `posts/comment/all/<int:post_id>/`    
+  OUTPUT    
   *`Response 200`*   
   ```json
   [
-    //output
     {
       "id": 1,
       "post": 2,
@@ -371,14 +347,9 @@
       "comment": "Good job"
     }
   ]
-  ```
-  
-* `posts/comment/delete/<int:comment_id>/` - link to the remove comment for a user's post  
-  `posts/comment/delete/1/`   
-  **DELETE**   
-  *`Response 200`*   
-  ```json
-  {
-    //output
-  }
-   ```
+  ```    
+
+### **Remove comment for user's post**
+* **DELETE** `posts/comment/delete/<int:comment_id>/`    
+  OUTPUT    
+  *`Response 200`*    
