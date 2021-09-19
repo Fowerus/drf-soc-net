@@ -1,4 +1,4 @@
-# **Django-Rest-Framework Social network**
+# **DRF API Social network**
 
 ## **Inroduction**
 
