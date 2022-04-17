@@ -1,49 +1,57 @@
 from django.db import models
-from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.core import validators
 from django.contrib.auth import get_user_model
 
+from django_resized import ResizedImageField
+
+from .managers import UserManager 
 
 
-class UserManager(BaseUserManager):
-	def _create_user(self, email, username, last_name=None, first_name=None, password=None, **extra_fields):
-		username = self.model.normalize_username(username)
-		email = self.normalize_email(email)
-		user = self.model(username=username, email=email, last_name=last_name, first_name=first_name, **extra_fields)
-		user.set_password(password)
-		user.save(using = self._db)
 
-		return user
+class Image(models.Model):
+	full_image = ResizedImageField(crop=['middle', 'center'], upload_to='../static/images/Users')
+	middle_image = ResizedImageField(crop=['middle', 'center'], null = True, upload_to='../static/images/Users')
+	small_image = ResizedImageField(crop=['middle', 'center'], null=True, upload_to='.../static/images/Users')
+	
+	created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created at')
+
+	likes = models.ManyToManyField('User', blank=True, related_name='image_likes', verbose_name='Likes')
+
+	def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+		if self.middle_image is None:
+			self.middle_image = self.full_image
+		if self.small_image is None:
+			self.small_image = self.full_image
+
+		return self.save(force_insert, force_update, using, update_fields)
 
 
-	def create_user(self, email, username, last_name=None, first_name=None, password=None, **extra_fields):
-		extra_fields.setdefault('is_staff', False)
-		extra_fields.setdefault('is_superuser', False)
-
-		return self._create_user(email=email, username=username, last_name=last_name, first_name=first_name, password=password, **extra_fields)
+	def __str__(self):
+		return f'{self.id}'
 
 
-	def create_superuser(self, username, email, last_name=None, first_name=None, password=None, **extra_fields):
-		extra_fields.setdefault('is_staff', True)
-		extra_fields.setdefault('is_superuser', True)
-
-		return self._create_user(email=email, username=username, last_name=last_name, first_name=first_name, password=password, **extra_fields)
+	class Meta:
+		verbose_name_plural = 'Images'
+		verbose_name = 'Image'
+		ordering = ['created_at']
 
 
 
 class User(AbstractBaseUser, PermissionsMixin):
 	username = models.CharField(max_length=100, unique=True, verbose_name='Username')
 	email = models.EmailField(validators=[validators.EmailValidator], unique=True, verbose_name='Email')
-	image = models.ImageField(upload_to='../media/Users/images', verbose_name = 'Image')
 	last_name = models.CharField(max_length=150, null=True, blank=True, verbose_name='Last name')
 	first_name = models.CharField(max_length=150, null=True, blank=True, verbose_name='First name')
 	second_name = models.CharField(max_length=150, null=True, blank=True, verbose_name='Second name')
 	created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created at')
 	updated_at = models.DateTimeField(auto_now=True, verbose_name='Updated at')
 
-	friends = models.ManyToManyField('User', blank = True, related_name = 'user_friends', verbose_name = 'Friends')
-	followers = models.ManyToManyField('User', blank = True, related_name = 'user_followers', verbose_name = 'Followers')
+	image = models.OneToOneField(Image, on_delete=models.SET_NULL, null=True, blank=True, related_name='user_image', verbose_name='Image')
+	images = models.ManyToManyField(Image, blank=True, related_name='user_images', verbose_name='Images')
+	friends = models.ManyToManyField('User', blank=True, related_name='user_friends', verbose_name='Friends')
+	followers = models.ManyToManyField('User', blank=True, related_name='user_followers', verbose_name='Followers')
 
 	is_staff = models.BooleanField(default=False)
 	is_superuser = models.BooleanField(default=False)
@@ -62,4 +70,4 @@ class User(AbstractBaseUser, PermissionsMixin):
 	class Meta:
 		verbose_name_plural = 'Users'
 		verbose_name = 'User'
-		ordering = ['-created_at']
+		ordering = ['-updated_at']

@@ -10,6 +10,7 @@ django-filter = "*"
 djoser = "*"
 psycopg2 = "*"
 pillow = "*"
+django-resized = "*"
 
 [dev-packages]
 
